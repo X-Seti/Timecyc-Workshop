@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#this belongs in apps/components/Timecyc_Editor/timecyc_workshop.py - Version: 2
+#this belongs in apps/components/Timecyc_Editor/timecyc_workshop.py - Version: 3
 # X-Seti - May08 2026 - Img Factory 1.6 - Time Cycle Editor
 
 """
