@@ -345,19 +345,32 @@ class TimecycWorkshop(GUIWorkshop): #vers 1
         header.addStretch()
 
         def _make_btn(text, icon_text, tooltip, callback, enabled=True):
-            btn = QPushButton(icon_text)
+            btn = QPushButton(text)
             btn.setToolTip(tooltip)
             btn.setEnabled(enabled)
             btn.clicked.connect(callback)
             btn.setFixedHeight(22)
+            btn.setMinimumWidth(44)
             btn.setCheckable(False)
             return btn
 
-        self._btn_convert = _make_btn("Convert", "⇄", "Convert between game formats", self._convert_dialog)
-        self._btn_load    = _make_btn("Load",    "📂", "Load timecyc.dat",             self._open_file)
-        self._btn_save    = _make_btn("Save",    "💾", "Save timecyc.dat",             self._save_file)
-        self._btn_import  = _make_btn("Import",  "⬇", "Import from another format",   self._import_file)
-        self._btn_export  = _make_btn("Export",  "⬆", "Export to another format",     self._export_file)
+        self._btn_convert = _make_btn("Convert", "Conv", "Convert between game formats", self._convert_dialog)
+        self._btn_load    = _make_btn("Load",    "Load", "Load timecyc.dat",             self._open_file)
+        self._btn_save    = _make_btn("Save",    "Save", "Save timecyc.dat",             self._save_file)
+        self._btn_import  = _make_btn("Import",  "Imp", "Import from another format",   self._import_file)
+        self._btn_export  = _make_btn("Export",  "Exp", "Export to another format",     self._export_file)
+
+        # Apply SVG icons
+        try:
+            from apps.methods.imgfactory_svg_icons import SVGIconFactory as _SVG
+            ic = '#cccccc'
+            self._btn_convert.setIcon(_SVG.convert_icon(16, ic))
+            self._btn_load.setIcon(_SVG.open_icon(16, ic))
+            self._btn_save.setIcon(_SVG.save_icon(16, ic))
+            self._btn_import.setIcon(_SVG.import_icon(16, ic))
+            self._btn_export.setIcon(_SVG.export_icon(16, ic))
+        except Exception:
+            pass
 
         for btn in (self._btn_convert, self._btn_load, self._btn_save,
                     self._btn_import, self._btn_export):
@@ -811,11 +824,11 @@ class TimecycWorkshop(GUIWorkshop): #vers 1
     def _update_action_btns(self, narrow: bool): #vers 1
         """Collapse action buttons to icons when panel is narrow (<500px)."""
         labels = {
-            self._btn_convert: ("⇄ Convert", "⇄"),
-            self._btn_load:    ("📂 Load",    "📂"),
-            self._btn_save:    ("💾 Save",    "💾"),
-            self._btn_import:  ("⬇ Import",  "⬇"),
-            self._btn_export:  ("⬆ Export",  "⬆"),
+            self._btn_convert: ("Convert", "Conv"),
+            self._btn_load:    ("Load",    "Load"),
+            self._btn_save:    ("Save",    "Save"),
+            self._btn_import:  ("Import",  "Imp"),
+            self._btn_export:  ("Export",  "Exp"),
         }
         for btn, (full, icon) in labels.items():
             btn.setText(icon if narrow else full)
