@@ -1,48 +1,33 @@
 #!/usr/bin/env python3
 """
-X-Seti - December14 2025 - Timecyc_Workshop 1.6 - Root Launcher
-#this belongs in root /launch_Timecyc_workshop.py - Version: 2
+X-Seti - May 2026 - Timecyc Workshop - Root Launcher
+#this belongs in root /launch_timecycle_workshop.py - Version: 3
 """
 import sys
 from pathlib import Path
 
-# Get the root directory (where this launcher is located)
 root_dir = Path(__file__).parent.resolve()
-
-# Add root to path so we can import from apps/
 if str(root_dir) not in sys.path:
     sys.path.insert(0, str(root_dir))
 
-# Now import and run Timecyc_workshop from apps/components/Timecyc_Editor/
 if __name__ == "__main__":
     try:
-        print("Timecyc_Workshop 1 Starting...")
-        
-        # Import the main module
-        from apps.components.Timecyc_Editor import timecyc_workshop
-        
-        # If col_workshop has a main() function, call it
-        if hasattr(timecyc_workshop, 'main'):
-            sys.exit(col_workshop.main())
-        else:
-            # No main() function - run workshop directly
-            from PyQt6.QtWidgets import QApplication
-            
-            app = QApplication(sys.argv)
-            workshop = timecyc_workshop()
-            workshop.setWindowTitle("Timecyc Workshop 1 - Standalone")
-            workshop.resize(1200, 800)
-            workshop.show()
-            
-            sys.exit(app.exec())
-            
+        print("Timecyc Workshop starting...")
+        from PyQt6.QtWidgets import QApplication
+        from apps.components.Timecyc_Editor.timecyc_workshop import TimecycWorkshop
+
+        app = QApplication(sys.argv)
+        w = TimecycWorkshop()
+        w.setWindowTitle("Timecyc Workshop — Standalone")
+        w.resize(1280, 860)
+        w.show()
+        sys.exit(app.exec())
+
     except ImportError as e:
-        print(f"ERROR: Failed to import Timecyc_workshop: {e}")
-        print(f"Root directory: {root_dir}")
-        print(f"Expected path: {root_dir}/apps/components/Timecyc_Editor/Timecyc_workshop.py")
+        print(f"ERROR: Failed to import: {e}")
+        import traceback; traceback.print_exc()
         sys.exit(1)
     except Exception as e:
-        print(f"ERROR: Failed to start Timecyc_Workshop: {e}")
-        import traceback
-        traceback.print_exc()
+        print(f"ERROR: {e}")
+        import traceback; traceback.print_exc()
         sys.exit(1)
