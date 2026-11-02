@@ -8,3 +8,6 @@ dist/
 /_internal/
 /*.exe
 .venv/
+/*_dist/
+/Timecyc_Workshop
+/Timecyc_Workshop.app/

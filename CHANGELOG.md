@@ -2,6 +2,9 @@
 
 ---
 
+## Nov 02 2026 - Licence
+- LICENSE changed from GPL v3 to MIT, same as the other IMG Factory tools.
+
 ## Build 3 — May 2026
 
 ### New Features
